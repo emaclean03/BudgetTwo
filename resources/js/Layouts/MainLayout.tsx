@@ -1,7 +1,7 @@
 import React from "react";
-import {Link} from "@inertiajs/inertia-react";
 import Navigation from "./Navigation";
 import SideNavigation from "./SideNavigation";
+
 
 const MainLayout = ({children}: any) => {
     return (

@@ -18,7 +18,6 @@ class BudgetController extends Controller
      */
     public function index(Budget $budget): Response
     {
-        //update git
         return Inertia::render('Budget/Budget', [
             'budget'=>$budget
         ]);
