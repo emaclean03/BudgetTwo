@@ -1,13 +1,18 @@
-import React from "react";
+import React, {useContext} from "react";
+import 'tw-elements';
+import {BudgetContext} from "../Contexts/Budget/Budget";
 
-const SideNavigation = () => {
+
+const SideNavigation = ({}) => {
+    const budget = useContext(BudgetContext);
+
     return(
         <div className=" w-70 flex-shrink flex-grow-0 p-4">
             <div className="sticky top-0 p-4 bg-gray-100 rounded-xl w-full">
                 <a href="#!">
                     <div className="flex items-center">
                         <div className="grow ml-3">
-                            <p className="text-sm font-semibold text-blue-600">Budget name</p>
+                            <p className="text-sm font-semibold text-blue-600">{budget.budget_name}</p>
                         </div>
                     </div>
                 </a>
