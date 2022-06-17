@@ -38,7 +38,7 @@ const SideNavigation = ({}) => {
             </ul>
             <div className="text-center bottom-0 absolute w-full">
                 <hr className="m-0"/>
-                <p className="py-2 text-sm text-gray-700">tailwind-elements.com</p>
+                <p className="py-2 text-sm text-gray-700">EzBudget</p>
             </div>
         </div>
     )
