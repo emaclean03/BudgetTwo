@@ -1,8 +1,12 @@
 import React, {useMemo} from "react";
 import { useTable } from 'react-table'
 
+interface ColumnDetails {
+    [key: string]: string
+}
+
 const BudgetTable = () => {
-    const data = useMemo(
+    const data = useMemo<ColumnDetails[]>(
         () => [
             {
                 Category: 'Hello',
@@ -39,7 +43,7 @@ const BudgetTable = () => {
             },
         ],
         []
-    ) as any;
+    );
 
     const tableInstance = useTable({ columns, data })
 
