@@ -19,7 +19,8 @@ class BudgetController extends Controller
     public function index(Budget $budget): Response
     {
         return Inertia::render('Budget/Budget', [
-            'budget'=>$budget
+            'budget'=>$budget,
+            'accounts'=>$budget->account()->get(),
         ]);
     }
 
