@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BudgetController;
+use App\Models\Budget;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -16,11 +18,17 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function(){
-    return Inertia::render('Home');
+    return Inertia::render('Home', [
+        'all_accounts'=>Budget::all(),
+    ]);
 });
 
 Route::prefix('budget')->middleware('auth')->group(function () {
     Route::get('/{budget}', [BudgetController::class, 'index'])->name('Budget.index');
+});
+
+Route::prefix('account')->middleware('auth')->group(function () {
+    Route::get('/{account}/show', [AccountController::class, 'show'])->name('Account.index'); //show single account
 });
 
 require __DIR__ . '/auth.php';

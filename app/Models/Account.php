@@ -6,21 +6,24 @@ use App\Traits\Multitenantable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Budget extends Model
+class Account extends Model
 {
     use HasFactory, Multitenantable;
+    protected $fillable = [
+        'account_name',
+        'account_type',
+        'account_balance',
+    ];
 
-
-    public function user(): BelongsTo
+    public function user():BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function account(): HasMany
+    public function budget():BelongsTo
     {
-        return $this->hasMany(Account::class);
+        return $this->belongsTo(Budget::class);
     }
+
 }

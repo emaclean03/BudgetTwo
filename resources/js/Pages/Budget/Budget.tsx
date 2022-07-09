@@ -1,96 +1,42 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import MainLayout from "../../Layouts/MainLayout";
+import {BudgetContext} from "../../Contexts/Budget/Budget";
+import BudgetTable from "./BudgetTable";
+import {Link, usePage} from "@inertiajs/inertia-react";
+import {AccountContext} from "../../Contexts/Budget/Account";
+import SideNavigation from "../../Layouts/SideNavigation";
 
-interface IProps{
-    budget:[{
+interface IProps {
+    budget: {
         budget_name: string,
         id: number,
-    }]
+    },
+    accounts: [{
+        id: number,
+        account_name: string,
+        account_type: string,
+        account_balance: number,
+    }],
 }
 
-const Budget = ({budget}:IProps) => {
+const Budget = ({budget, accounts}: IProps) => {
+    const { user } = usePage().props
+
     return (
-        <MainLayout>
-            <div className="container border-black px-6 py-2 flex">
-               <div className={'block'}>
-                Button one
-               </div>
-            </div>
-            <div className={'container rounded-md border-2 border-black'}>
+                <MainLayout budget={budget} accounts={accounts}>
+                    <div className="container border-black px-6 py-2 flex">
+                        <div className={'block'}>
+                            {/*Make this into a navigation component*/}
+                            <Link
+                                className={'text-blue-600 hover:text-blue-700 transition duration-300 ease-in-out mb-4'}
+                                href={'#'} as={'button'}>Create Category</Link>
+                        </div>
+                    </div>
+                    <div className={'container rounded-md border-2 border-gray-400'}>
+                        <BudgetTable/>
+                    </div>
+                </MainLayout>
 
-                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 compact">
-                        <thead
-                            className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" className="px-6 py-3">
-                                Category
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Assigned
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Activity
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Available
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row"
-                                className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                Apple MacBook Pro 17"
-                            </th>
-                            <td className="px-6 py-4">
-                                Sliver
-                            </td>
-                            <td className="px-6 py-4">
-                                Laptop
-                            </td>
-                            <td className="px-6 py-4">
-                                $2999
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row"
-                                className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                Microsoft Surface Pro
-                            </th>
-                            <td className="px-6 py-4">
-                                White
-                            </td>
-                            <td className="px-6 py-4">
-                                Laptop PC
-                            </td>
-                            <td className="px-6 py-4">
-                                $1999
-                            </td>
-
-                        </tr>
-                        <tr className="bg-white dark:bg-gray-800">
-                            <th scope="row"
-                                className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                Magic Mouse 2
-                            </th>
-                            <td className="px-6 py-4">
-                                Black
-                            </td>
-                            <td className="px-6 py-4">
-                                Accessories
-                            </td>
-                            <td className="px-6 py-4">
-                                $99
-                            </td>
-
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </MainLayout>
     )
 }
 

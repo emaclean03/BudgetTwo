@@ -3,12 +3,12 @@ import {Link, usePage} from "@inertiajs/inertia-react";
 
 
 const Navigation = () => {
-    const {auth}: any = usePage().props
+    const {user}: any = usePage().props
 
     return (
         <nav>
             <div className="container mx-auto px-6 py-2 flex justify-between items-center">
-                <a className="font-bold text-2xl lg:text-4xl" href="/budget">
+                <a className="font-bold text-2xl lg:text-4xl" href="/">
                     Budget
                 </a>
                 <div className="block lg:hidden">
@@ -24,7 +24,7 @@ const Navigation = () => {
                 <div className="hidden lg:block">
                     <ul className="inline-flex">
                         <li><a className="px-4 font-bold" href="/">Home</a></li>
-                        {auth.user ?
+                        {user ?
                             <>
                                 <li className={'mr-3'}><Link as={'button'} href="/budget">Budget</Link></li>
                                 <li><Link method={'post'} as={'button'} href="/logout">Logout</Link></li>

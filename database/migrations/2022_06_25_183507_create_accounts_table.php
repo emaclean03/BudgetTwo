@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('budgets', function (Blueprint $table) {
+        Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('budget_name')->nullable(false);
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('budget_id')->constrained();
+            $table->string('account_name')->nullable(false);
+            $table->string('account_type')->nullable(false);
+            $table->decimal('account_balance')->default(0.00);
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('budgets');
+        Schema::dropIfExists('accounts');
     }
 };
