@@ -20,7 +20,8 @@ class BudgetController extends Controller
     {
         return Inertia::render('Budget/Budget', [
             'budget'=>$budget,
-            'accounts'=>$budget->account()->get(),
+            'all_accounts'=>$budget->account()->get(),
+            'account_balance'=>$budget->account()->get()->sum('account_balance'),
         ]);
     }
 

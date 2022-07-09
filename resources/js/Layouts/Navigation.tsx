@@ -26,7 +26,6 @@ const Navigation = () => {
                         <li><a className="px-4 font-bold" href="/">Home</a></li>
                         {user ?
                             <>
-                                <li className={'mr-3'}><Link as={'button'} href="/budget">Budget</Link></li>
                                 <li><Link method={'post'} as={'button'} href="/logout">Logout</Link></li>
                             </>
                             :

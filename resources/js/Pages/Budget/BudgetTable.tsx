@@ -9,15 +9,15 @@ const BudgetTable = () => {
     const data = useMemo<ColumnDetails[]>(
         () => [
             {
-                Category: 'Hello',
-                Assigned: 'World',
-                Activity: 'World',
-                Available: 'World',
+                Category: 'Mortgage',
+                Assigned: '120',
+                Activity: '-50',
+                Available: '70',
             },{
-                Category: 'Hello',
-                Assigned: 'World',
-                Activity: 'World',
-                Available: 'World',
+                Category: 'Transportation',
+                Assigned: '100',
+                Activity: '50',
+                Available: '50',
             },
         ],
         []

@@ -1,9 +1,9 @@
-import React, {useContext, useEffect} from "react";
+import React from "react";
 import 'tw-elements';
-import {Link, usePage} from "@inertiajs/inertia-react";
+import {Link} from "@inertiajs/inertia-react";
+import {ISideNaviationProps} from "../interface";
 
-
-const SideNavigation = ({budget, accounts}:any) => {
+const SideNavigation = ({budget, accounts}:ISideNaviationProps) => {
     return(
         <div className=" w-70 flex-shrink flex-grow-0 p-4">
             <div className="sticky top-0 p-4 bg-gray-100 rounded-xl w-full">

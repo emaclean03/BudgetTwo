@@ -3,9 +3,13 @@ import Navigation from "./Navigation";
 import SideNavigation from "./SideNavigation";
 
 import {usePage} from "@inertiajs/inertia-react";
+import {IAuth} from "../interface";
+import {Page} from "@inertiajs/inertia";
+
+
 
 const MainLayout = ({children, budget, accounts}: any) => {
-    const {user}: any = usePage().props;
+    const {user} = usePage().props;
 
     return (
         <>
