@@ -2,8 +2,9 @@ import React, {useContext, useEffect} from "react";
 import MainLayout from "../../Layouts/MainLayout";
 import {BudgetContext} from "../../Contexts/Budget/Budget";
 import BudgetTable from "./BudgetTable";
-import {Link} from "@inertiajs/inertia-react";
+import {Link, usePage} from "@inertiajs/inertia-react";
 import {AccountContext} from "../../Contexts/Budget/Account";
+import SideNavigation from "../../Layouts/SideNavigation";
 
 interface IProps {
     budget: {
@@ -19,10 +20,10 @@ interface IProps {
 }
 
 const Budget = ({budget, accounts}: IProps) => {
+    const { user } = usePage().props
+
     return (
-        <BudgetContext.Provider value={budget}>
-            <AccountContext.Provider value={accounts}>
-                <MainLayout>
+                <MainLayout budget={budget} accounts={accounts}>
                     <div className="container border-black px-6 py-2 flex">
                         <div className={'block'}>
                             {/*Make this into a navigation component*/}
@@ -35,8 +36,7 @@ const Budget = ({budget, accounts}: IProps) => {
                         <BudgetTable/>
                     </div>
                 </MainLayout>
-            </AccountContext.Provider>
-        </BudgetContext.Provider>
+
     )
 }
 
