@@ -6,6 +6,7 @@ import {InertiaProgress} from "@inertiajs/progress";
 
 const app = document.getElementById('app')
 
+
 render(
     <InertiaApp
         initialPage={JSON.parse(app.dataset.page)}
