@@ -3,20 +3,23 @@ import Navigation from "./Navigation";
 import SideNavigation from "./SideNavigation";
 
 import {usePage} from "@inertiajs/inertia-react";
-import {IAuth} from "../interface";
+import {IAuth, IPropsInterface} from "../interface";
 import {Page} from "@inertiajs/inertia";
 
 
 
-const MainLayout = ({children, budget, accounts}: any) => {
-    const {user} = usePage().props;
+const MainLayout = ({children, budget}: any) => {
+    const {user, accounts} = usePage<IPropsInterface>().props;
 
+    useEffect(() => {
+        console.log(accounts);
+    }, [])
     return (
         <>
             <Navigation/>
             <div className="w-full flex flex-col sm:flex-row flex-grow overflow-hidden">
                 {/*This means were inside a budget*/}
-                {user && budget && accounts &&
+                {user && budget &&
                     <SideNavigation budget={budget} accounts={accounts}/>
                 }
                 <main role="main"

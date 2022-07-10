@@ -38,6 +38,8 @@ class HandleInertiaRequests extends Middleware
             'user' => fn () => $request->user()
                 ? $request->user()->only('id', 'name', 'email')
                 : null,
+            'accounts' => fn() => $request->user() ?
+                $request->user()->account()->get() : null,
             'ziggy' => function () {
                 return (new Ziggy)->toArray();
             },
