@@ -47,7 +47,6 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        dd($account);
         return Inertia::render('Account/Account', [
             'account'=>$account
         ]);
