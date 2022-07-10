@@ -15,19 +15,18 @@ const MainLayout = ({children, budget}: any) => {
         console.log(accounts);
     }, [])
     return (
-        <>
+        <div>
             <Navigation/>
-            <div className="w-full flex flex-col sm:flex-row flex-grow overflow-hidden">
+            <div className="flex bg-gray-100 text-gray-900 min-h-screen">
                 {/*This means were inside a budget*/}
                 {user && budget &&
                     <SideNavigation budget={budget} accounts={accounts}/>
                 }
-                <main role="main"
-                      className="w-full h-full bg-gray-200 rounded-lg m-3 flex-grow p-3 overflow-auto">
+                <main role="main" className="w-full bg-gray-200 rounded-lg m-3 flex-grow p-3 overflow-auto">
                     {children}
                 </main>
             </div>
-        </>
+        </div>
     )
 }
 

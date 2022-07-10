@@ -37,10 +37,6 @@ const SideNavigation = ({budget}:any) => {
                     </li>
                 })}
             </ul>
-            <div className="text-center bottom-0 absolute w-full">
-                <hr className="m-0"/>
-                <p className="py-2 text-sm text-gray-700">EzBudget</p>
-            </div>
         </div>
     )
 }
