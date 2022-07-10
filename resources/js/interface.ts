@@ -7,7 +7,7 @@ export interface IAuth {
         email: string,
     }
 }
-
+//Single budget
 export interface IBudget {
     budget: {
         budget_name: string,
@@ -15,6 +15,13 @@ export interface IBudget {
     },
 }
 
+//Single bank account
+export interface IBankAccount{
+        id: number,
+        account_name: string,
+        account_balance: number,
+}
+//All bank accounts
 export interface IAllBankAccounts {
     all_accounts: [{
         id: number,

@@ -4,7 +4,7 @@ import {Link, usePage} from "@inertiajs/inertia-react";
 import {IAllBankAccounts, IPropsInterface} from "../interface";
 
 const Home = ({all_budgets}:any) => {
-    const { user, accounts } = usePage<IPropsInterface>().props
+    const { user } = usePage<IPropsInterface>().props
 
     return (
         <MainLayout budget={null}>
