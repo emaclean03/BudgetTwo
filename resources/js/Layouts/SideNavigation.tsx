@@ -1,9 +1,15 @@
-import React from "react";
+import React, {useEffect} from "react";
 import 'tw-elements';
-import {Link} from "@inertiajs/inertia-react";
-import {ISideNaviationProps} from "../interface";
+import {Link, usePage} from "@inertiajs/inertia-react";
+import { IPropsInterface} from "../interface";
 
-const SideNavigation = ({budget, accounts}:ISideNaviationProps) => {
+const SideNavigation = ({budget}:any) => {
+    const { accounts} = usePage<IPropsInterface>().props;
+
+    useEffect(() => {
+        console.log(accounts);
+    }, [])
+
     return(
         <div className=" w-70 flex-shrink flex-grow-0 p-4">
             <div className="sticky top-0 p-4 bg-gray-100 rounded-xl w-full">
@@ -16,7 +22,7 @@ const SideNavigation = ({budget, accounts}:ISideNaviationProps) => {
                 </a>
             </div>
             <ul className="relative px-1">
-                {accounts.map((account: any) => {
+                {accounts!.map((account: any) => {
                     return <li key={account.id} className="relative">
                         <Link
                             className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out"

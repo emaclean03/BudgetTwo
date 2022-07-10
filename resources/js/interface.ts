@@ -1,3 +1,5 @@
+import {Page, PageProps} from "@inertiajs/inertia";
+
 export interface IAuth {
     user?: {
         id: number,
@@ -33,3 +35,23 @@ export interface ISideNaviationProps {
     }]
 }
 
+
+
+export interface IPropsInterface extends Page<PageProps> {
+    props: {
+        errors: any,
+        user?: {
+            id: number,
+            name: string,
+            email: string,
+        },
+        accounts?: [{
+            id: number,
+            account_name: string,
+            account_balance: number,
+            account_type:string,
+            budget_id: number,
+            user_id: number,
+        }]
+    }
+}

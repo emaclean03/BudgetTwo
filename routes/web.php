@@ -20,7 +20,7 @@ use Inertia\Inertia;
 Route::get('/', function(){
     return Inertia::render('Home', [
         //probably use soft-deleted here
-        'all_accounts'=>Budget::all(),
+        'all_budgets'=>Budget::all(),
     ]);
 });
 

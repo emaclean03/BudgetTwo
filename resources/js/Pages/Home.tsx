@@ -1,15 +1,15 @@
 import React, {useEffect} from "react";
 import MainLayout from "../Layouts/MainLayout";
 import {Link, usePage} from "@inertiajs/inertia-react";
-import {IAllBankAccounts} from "../interface";
+import {IAllBankAccounts, IPropsInterface} from "../interface";
 
-const Home = ({all_accounts}:IAllBankAccounts) => {
-    const { user } = usePage().props
+const Home = ({all_budgets}:any) => {
+    const { user, accounts } = usePage<IPropsInterface>().props
 
     return (
-        <MainLayout>
-            {user ?
-                    all_accounts.map((item: any) => {
+        <MainLayout budget={null}>
+            {user  ?
+                    all_budgets!.map((item: any) => {
                         return <div key={item.id} className="flex justify-center">
                             <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm m-6">
                                 <h5 className="text-gray-900 text-xl leading-tight font-medium mb-2">{item.budget_name}</h5>
