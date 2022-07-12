@@ -7,7 +7,7 @@ const SideNavigation = ({budget}:any) => {
     const { accounts} = usePage<IPropsInterface>().props;
 
     useEffect(() => {
-        console.log(accounts);
+        console.log(budget);
     }, [])
 
     return(

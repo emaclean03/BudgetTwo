@@ -49,7 +49,7 @@ class AccountController extends Controller
     {
           return Inertia::render('Account/Account', [
               'account'=>$account,
-              'budget'=>$account->budget()->get(),
+              'budget'=>$account->budget()->first(),
         ]);
     }
 

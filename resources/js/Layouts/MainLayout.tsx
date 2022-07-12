@@ -11,9 +11,6 @@ import {Page} from "@inertiajs/inertia";
 const MainLayout = ({children, budget}: any) => {
     const {user, accounts} = usePage<IPropsInterface>().props;
 
-    useEffect(() => {
-        console.log(accounts);
-    }, [])
     return (
         <div>
             <Navigation/>
