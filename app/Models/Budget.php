@@ -19,8 +19,17 @@ class Budget extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function transaction(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
     public function account(): HasMany
     {
         return $this->hasMany(Account::class);
+    }
+
+    public function category():HasMany{
+        return $this->hasMany(Category::class);
     }
 }

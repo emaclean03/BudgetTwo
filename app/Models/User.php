@@ -43,12 +43,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function budget():HasMany {
+    public function budget(): HasMany
+    {
         return $this->hasMany(Budget::class);
     }
 
-    public function account():HasMany
+    public function transaction(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function account(): HasMany
     {
         return $this->hasMany(Account::class);
+    }
+
+    public function category():HasMany{
+        return $this->hasMany(Category::class);
     }
 }

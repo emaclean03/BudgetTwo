@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\TransactionController;
 use App\Models\Budget;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,6 +31,10 @@ Route::prefix('budget')->middleware('auth')->group(function () {
 
 Route::prefix('account')->middleware('auth')->group(function () {
     Route::get('/{account}/show', [AccountController::class, 'show'])->name('Account.index'); //show single account
+});
+
+Route::prefix('transaction')->middleware('auth')->group(function () {
+    Route::post('/{account}/transaction', [TransactionController::class, 'store'])->name('Transaction.store'); //show single account
 });
 
 require __DIR__ . '/auth.php';

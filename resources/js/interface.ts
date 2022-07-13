@@ -31,6 +31,16 @@ export interface IAllBankAccounts {
     }]
 }
 
+
+export interface IAllTransactions {
+    all_transactions: [{
+        id: number,
+        transaction_payee: string,
+        transaction_outflow: number,
+        transaction_inflow: number,
+    }];
+}
+
 export interface ISideNaviationProps {
     budget: {
         id: number,
@@ -42,6 +52,11 @@ export interface ISideNaviationProps {
     }]
 }
 
+/*Tables*/
+
+export interface ColumnDetails {
+    [key: string]: string
+}
 
 
 export interface IPropsInterface extends Page<PageProps> {
