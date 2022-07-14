@@ -18,7 +18,6 @@ class BudgetFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 1,
             'budget_name' => $this->faker->regexify('[A-Za-z0-9]{5}')
         ];
     }

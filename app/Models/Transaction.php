@@ -9,27 +9,32 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Budget extends Model
+class Transaction extends Model
 {
     use HasFactory, Multitenantable;
 
+    //protected $fillable = ['transaction_payee', 'transaction_outflow', 'transaction_inflow', 'user_id', 'budget_id', 'account_id'];
+    protected $guarded = [];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function transaction(): HasMany
+    public function budget(): BelongsTo
     {
-        return $this->hasMany(Transaction::class);
+        return $this->belongsTo(Budget::class);
     }
 
-    public function account(): HasMany
+    public function account(): BelongsTo
     {
-        return $this->hasMany(Account::class);
+        return $this->belongsTo(Account::class);
     }
 
-    public function category():HasMany{
-        return $this->hasMany(Category::class);
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
+
+
 }

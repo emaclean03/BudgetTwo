@@ -17,8 +17,6 @@ class AccountFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 1,
-            'budget_id'=> 2,
             'account_name' => $this->faker->regexify('[A-Za-z0-9]{5}'),
             'account_type' => 'Checking',
             'account_balance' => $this->faker->randomNumber(3),

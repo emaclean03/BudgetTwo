@@ -1,4 +1,4 @@
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Home_tsx"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Account_Account_tsx"],{
 
 /***/ "./resources/js/Layouts/MainLayout.tsx":
 /*!*********************************************!*\
@@ -188,10 +188,10 @@ exports["default"] = SideNavigation;
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Home.tsx":
-/*!*************************************!*\
-  !*** ./resources/js/Pages/Home.tsx ***!
-  \*************************************/
+/***/ "./resources/js/Pages/Account/Account.tsx":
+/*!************************************************!*\
+  !*** ./resources/js/Pages/Account/Account.tsx ***!
+  \************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -209,30 +209,13 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var MainLayout_1 = __importDefault(__webpack_require__(/*! ../Layouts/MainLayout */ "./resources/js/Layouts/MainLayout.tsx"));
+var MainLayout_1 = __importDefault(__webpack_require__(/*! ../../Layouts/MainLayout */ "./resources/js/Layouts/MainLayout.tsx"));
 
-var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
-
-var Home = function Home(_a) {
-  var all_accounts = _a.all_accounts;
-  var user = (0, inertia_react_1.usePage)().props.user;
-  return react_1["default"].createElement(MainLayout_1["default"], null, user ? all_accounts.map(function (item) {
-    return react_1["default"].createElement("div", {
-      key: item.id,
-      className: "flex justify-center"
-    }, react_1["default"].createElement("div", {
-      className: "block p-6 rounded-lg shadow-lg bg-white max-w-sm m-6"
-    }, react_1["default"].createElement("h5", {
-      className: "text-gray-900 text-xl leading-tight font-medium mb-2"
-    }, item.budget_name), react_1["default"].createElement(inertia_react_1.Link, {
-      className: 'inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out',
-      href: "/budget/".concat(item.id),
-      as: 'button'
-    }, "Select Budget")));
-  }) : react_1["default"].createElement("p", null, "Hello guest."));
+var Account = function Account() {
+  return react_1["default"].createElement(MainLayout_1["default"], null);
 };
 
-exports["default"] = Home;
+exports["default"] = Account;
 
 /***/ }),
 

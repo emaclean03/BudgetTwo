@@ -1,46 +1,44 @@
-import React, {useMemo} from "react";
-import { useTable } from 'react-table'
-import {ColumnDetails} from "../../interface";
+import React, {useEffect, useMemo} from "react";
+import {ColumnDetails, IAllTransactions} from "../../interface";
+import {useTable} from "react-table";
 
-const BudgetTable = () => {
+const AccountTransactionsTable = ({all_transactions}: any) => {
     const data = useMemo<ColumnDetails[]>(
-        () => [
-            {
-                Category: 'Mortgage',
-                Assigned: '120',
-                Activity: '-50',
-                Available: '70',
-            },{
-                Category: 'Transportation',
-                Assigned: '100',
-                Activity: '50',
-                Available: '50',
-            },
-        ],
-        []
+        () => all_transactions,
+        [all_transactions]
     )
+
+    useEffect(() => {
+        console.log('data', data);
+    }, [])
+
 
     const columns = useMemo(
         () => [
             {
+                Header: 'Date',
+                accessor: 'created_at', // accessor is the "key" in the data
+            },
+            {
+                Header: 'Payee',
+                accessor: 'transaction_payee', // accessor is the "key" in the data
+            },
+            {
                 Header: 'Category',
-                accessor: 'Category', // accessor is the "key" in the data
+                accessor: 'category.category_name', // accessor is the "key" in the data
             },
             {
-                Header: 'Assigned',
-                accessor: 'Assigned', // accessor is the "key" in the data
+                Header: 'Outflow',
+                accessor: 'transaction_outflow', // accessor is the "key" in the data
             },
             {
-                Header: 'Activity',
-                accessor: 'Activity', // accessor is the "key" in the data
-            },
-            {
-                Header: 'Available',
-                accessor: 'Available', // accessor is the "key" in the data
+                Header: 'Inflow',
+                accessor: 'transaction_inflow', // accessor is the "key" in the data
             },
         ],
         []
     );
+
 
     const tableInstance = useTable({ columns, data })
 
@@ -100,4 +98,4 @@ const BudgetTable = () => {
     )
 }
 
-export default BudgetTable
+export default AccountTransactionsTable;

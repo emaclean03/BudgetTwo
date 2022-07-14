@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
+use App\Models\Category;
 use Inertia\Inertia;
 
 class AccountController extends Controller
@@ -47,8 +48,12 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        return Inertia::render('Account/Account', [
-            'account'=>$account
+
+          return Inertia::render('Account/Account', [
+              'account'=>$account,
+              'budget'=>$account->budget()->first(),
+              'all_transactions'=>$account->transaction()->with('category')->get(),
+              'categories'=>Category::all(),
         ]);
     }
 
