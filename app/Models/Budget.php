@@ -13,6 +13,7 @@ class Budget extends Model
 {
     use HasFactory, Multitenantable;
 
+    protected $fillable = ['budget_name'];
 
     public function user(): BelongsTo
     {

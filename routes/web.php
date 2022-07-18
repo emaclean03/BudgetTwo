@@ -27,6 +27,8 @@ Route::get('/', function(){
 
 Route::prefix('budget')->middleware('auth')->group(function () {
     Route::get('/{budget}', [BudgetController::class, 'index'])->name('Budget.index');
+    Route::post('/', [BudgetController::class, 'store'])->name('Budget.store');
+    Route::post('/{budget}/delete', [BudgetController::class, 'destroy'])->name('Budget.destroy');
     //create new budget
 });
 

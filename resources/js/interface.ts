@@ -31,6 +31,15 @@ export interface IAllBankAccounts {
     }]
 }
 
+//All budgets
+export interface IAllBudgets {
+    all_budgets: [{
+        id: number,
+        budget_name: string,
+
+    }]
+}
+
 
 export interface IAllTransactions {
     all_transactions: [{
@@ -58,8 +67,9 @@ export interface ColumnDetails {
     [key: string]: string
 }
 
-
-export interface IPropsInterface extends Page<PageProps> {
+//Shared data from Inertia props
+//EX:    const { user } = usePage<ISharedPropsInterface>().props
+export interface ISharedPropsInterface extends Page<PageProps> {
     props: {
         errors: any,
         user?: {
