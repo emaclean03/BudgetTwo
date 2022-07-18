@@ -27,6 +27,7 @@ Route::get('/', function(){
 
 Route::prefix('budget')->middleware('auth')->group(function () {
     Route::get('/{budget}', [BudgetController::class, 'index'])->name('Budget.index');
+    //create new budget
 });
 
 Route::prefix('account')->middleware('auth')->group(function () {
