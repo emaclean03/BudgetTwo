@@ -3,13 +3,13 @@ import Navigation from "./Navigation";
 import SideNavigation from "./SideNavigation";
 
 import {usePage} from "@inertiajs/inertia-react";
-import {IAuth, IPropsInterface} from "../interface";
+import {IAuth, ISharedPropsInterface} from "../interface";
 import {Page} from "@inertiajs/inertia";
 
 
 
-const MainLayout = ({children, budget}: any) => {
-    const {user, accounts} = usePage<IPropsInterface>().props;
+const MainLayout = ({children, budget = null}: any) => {
+    const {user, accounts} = usePage<ISharedPropsInterface>().props;
 
     return (
         <div>

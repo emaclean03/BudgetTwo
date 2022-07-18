@@ -1,10 +1,10 @@
 import React, {useEffect} from "react";
 import 'tw-elements';
 import {Link, usePage} from "@inertiajs/inertia-react";
-import { IPropsInterface} from "../interface";
+import { ISharedPropsInterface} from "../interface";
 
 const SideNavigation = ({budget}:any) => {
-    const { accounts} = usePage<IPropsInterface>().props;
+    const { accounts} = usePage<ISharedPropsInterface>().props;
 
     useEffect(() => {
         console.log(budget);
