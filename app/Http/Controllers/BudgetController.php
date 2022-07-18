@@ -6,6 +6,7 @@ use App\Http\Requests\StoreBudgetRequest;
 use App\Http\Requests\UpdateBudgetRequest;
 use App\Models\Budget;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -26,24 +27,21 @@ class BudgetController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreBudgetRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreBudgetRequest $request)
     {
-        //
+        try {
+            $budget = new Budget(['budget_name'=>$request->budget_name]);
+            Auth::user()->budget()->save($budget);
+        } catch (\Exception $e){
+            return Response()->json(['exception'=>$e]);
+        }
+
+        return Response()->json($budget);
     }
 
     /**
@@ -84,10 +82,12 @@ class BudgetController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Budget  $budget
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Budget $budget)
     {
-        //
+        $budget->delete();
+
+        return Redirect()->back();
     }
 }
