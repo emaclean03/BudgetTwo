@@ -1,10 +1,7 @@
-import React, {useContext, useEffect} from "react";
+import React from "react";
 import MainLayout from "../../Layouts/MainLayout";
-import {BudgetContext} from "../../Contexts/Budget/Budget";
 import BudgetTable from "./BudgetTable";
-import {Link, usePage} from "@inertiajs/inertia-react";
-import {AccountContext} from "../../Contexts/Budget/Account";
-import SideNavigation from "../../Layouts/SideNavigation";
+import {Link} from "@inertiajs/inertia-react";
 import {IAllBankAccounts, IBudget} from "../../interface";
 
 const Budget = ({budget, all_accounts, account_balance}: {budget:IBudget, all_accounts: IAllBankAccounts, account_balance:number}) => {

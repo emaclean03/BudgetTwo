@@ -15,6 +15,8 @@ class Account extends Model
         'account_name',
         'account_type',
         'account_balance',
+        'budget_id',
+        'user_id'
     ];
 
     public function user():BelongsTo
