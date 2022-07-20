@@ -39,6 +39,7 @@ class TransactionController extends Controller
      */
     public function store(StoreTransactionRequest $request, Account $account)
     {
+        //TODO: Change user_id to an observer
       $transaction = new Transaction([
           'user_id' => Auth::user()->id,
           'budget_id'=> $account->budget->id,
