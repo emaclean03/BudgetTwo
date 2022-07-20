@@ -1,13 +1,13 @@
 import React, {useEffect} from "react";
 import 'tw-elements';
 import {Link, usePage} from "@inertiajs/inertia-react";
-import { ISharedPropsInterface} from "../interface";
+import {ISharedPropsInterface} from "../interface";
 import AccountCreate from "../Pages/Account/AccountCreate";
 
-const SideNavigation = ({budget}:any) => {
-    const { accounts} = usePage<ISharedPropsInterface>().props;
+const SideNavigation = ({budget}: any) => {
+    const {accounts} = usePage<ISharedPropsInterface>().props;
 
-    return(
+    return (
         <div className=" w-70 flex-shrink flex-grow-0 p-4">
             <div className="sticky top-0 p-4 bg-gray-100 rounded-xl w-full">
                 <a href={`/budget/${budget.id}`}>
@@ -15,7 +15,7 @@ const SideNavigation = ({budget}:any) => {
                         <div className="grow ml-3 w-full">
                             <p className="text-sm font-semibold text-blue-600">{budget.budget_name}</p>
                             <hr className={'solid h-1 bg-gray-400 w-full'}/>
-                           <AccountCreate/>
+                            <AccountCreate/>
                         </div>
                     </div>
                 </a>

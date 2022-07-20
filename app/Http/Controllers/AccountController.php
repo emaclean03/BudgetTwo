@@ -38,25 +38,22 @@ class AccountController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreAccountRequest  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreAccountRequest $request)
     {
         try {
-            $account = new Account([
+            Account::create([
                 'budget_id'=> $request->budget_id,
                 'account_name' => $request->account_name,
-                'account_type' => 'checking',
-                'account_balance' => 0.00
+                'account_type' => $request->account_type,
+                'account_balance' => $request->account_balance
             ]);
-
-            $account->save();
         } catch (\Exception $e){
-            return Response()->json(['exception'=>$e->getMessage()]);
+            Log::error('Error creating new account: ' . $e->getMessage());
         }
+        return Redirect::back();
 
-        return Response()->json(['great'=>'work']);
-        //return full account;
     }
 
     /**

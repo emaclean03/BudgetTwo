@@ -3,28 +3,14 @@ import axios from "axios";
 import {usePage} from "@inertiajs/inertia-react";
 import {ISharedPropsInterface} from "../../interface";
 import {AccountReducer} from "../../reducers/Account/accountReducer";
+import {Inertia} from "@inertiajs/inertia";
 
 
 
 const AccountCreate = () => {
-    const { accounts } = usePage<ISharedPropsInterface>().props;
-
-    const [account, dispatch] = useReducer(
-        AccountReducer,
-        accounts as [{}],
-    );
-
     const handleCreateAccount = () => {
         const newAccountPrompt = prompt('What is your new account name?');
-
-        axios.post('/account/store', {account_name: 'test', budget_id: 1})
-            .then((res:any) => {
-                dispatch({
-                    type: 'add',
-                    account_name: 'test',
-                    account_id: 1,
-                });
-            })
+        Inertia.post('/account/store', {account_name: newAccountPrompt, budget_id: 1, account_type: 'checking', account_balance: 0.00})
     }
 
 

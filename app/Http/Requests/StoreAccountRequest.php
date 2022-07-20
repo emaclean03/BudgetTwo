@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class StoreAccountRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class StoreAccountRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth::check() == 1;
     }
 
     /**
@@ -24,7 +26,10 @@ class StoreAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'budget_id'=> 'required',
+            'account_name' => 'required',
+            'account_type' => 'required',
+            'account_balance' => 'required'
         ];
     }
 }
