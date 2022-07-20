@@ -6,7 +6,13 @@ use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
 use App\Models\Category;
+use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Redis;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class AccountController extends Controller
 {
@@ -22,22 +28,32 @@ class AccountController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function create()
     {
-        //
+
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreAccountRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreAccountRequest $request)
     {
-        //
+        try {
+           Account::create([
+                'budget_id'=> Redis::get('current_budget_id'),
+                'account_name' => $request->account_name,
+                'account_type' => $request->account_type,
+                'account_balance' => $request->account_balance
+            ]);
+        } catch (\Exception $e){
+            Log::error('Error creating new account: ' . $e->getMessage());
+        }
+        return Redirect::back();
     }
 
     /**
@@ -48,7 +64,6 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-
           return Inertia::render('Account/Account', [
               'account'=>$account,
               'budget'=>$account->budget()->first(),

@@ -1,28 +1,26 @@
 import React, {useEffect} from "react";
 import 'tw-elements';
 import {Link, usePage} from "@inertiajs/inertia-react";
-import { ISharedPropsInterface} from "../interface";
+import {IAllBankAccounts, IBudget, ISharedPropsInterface} from "../interface";
+import AccountCreate from "../Pages/Account/AccountCreate";
 
-const SideNavigation = ({budget}:any) => {
-    const { accounts} = usePage<ISharedPropsInterface>().props;
+const SideNavigation = ({budget, all_accounts}: {budget:IBudget, all_accounts: IAllBankAccounts[] }) => {
 
-    useEffect(() => {
-        console.log(budget);
-    }, [])
-
-    return(
-        <div className=" w-70 flex-shrink flex-grow-0 p-4">
+    return (
+        <div className="flex-shrink flex-grow-0 p-4">
             <div className="sticky top-0 p-4 bg-gray-100 rounded-xl w-full">
                 <a href={`/budget/${budget.id}`}>
                     <div className="flex items-center">
-                        <div className="grow ml-3">
+                        <div className="grow ml-3 w-full">
                             <p className="text-sm font-semibold text-blue-600">{budget.budget_name}</p>
+                            <hr className={'solid h-1 bg-gray-400 w-28'}/>
+                            <AccountCreate/>
                         </div>
                     </div>
                 </a>
             </div>
             <ul className="relative px-1">
-                {accounts!.map((account: any) => {
+                {all_accounts!.map((account: any) => {
                     return <li key={account.id} className="relative">
                         <Link
                             className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out"

@@ -1,15 +1,15 @@
-import React, {useContext, useEffect} from "react";
+import React, {useEffect} from "react";
 import MainLayout from "../../Layouts/MainLayout";
-import {BudgetContext} from "../../Contexts/Budget/Budget";
 import BudgetTable from "./BudgetTable";
-import {Link, usePage} from "@inertiajs/inertia-react";
-import {AccountContext} from "../../Contexts/Budget/Account";
-import SideNavigation from "../../Layouts/SideNavigation";
+import {Link} from "@inertiajs/inertia-react";
 import {IAllBankAccounts, IBudget} from "../../interface";
 
 const Budget = ({budget, all_accounts, account_balance}: {budget:IBudget, all_accounts: IAllBankAccounts, account_balance:number}) => {
+    useEffect(() => {
+        console.log(all_accounts);
+    }, [])
     return (
-                <MainLayout budget={budget} accounts={all_accounts}>
+                <MainLayout budget={budget} all_accounts={all_accounts}>
                     <div className="flex justify-around border-black px-6 py-2 flex">
                         <div className={'block'}>
                             {/*Make this into a navigation component*/}

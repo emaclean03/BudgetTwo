@@ -8,8 +8,8 @@ import {Page} from "@inertiajs/inertia";
 
 
 
-const MainLayout = ({children, budget = null}: any) => {
-    const {user, accounts} = usePage<ISharedPropsInterface>().props;
+const MainLayout = ({children, budget = null, all_accounts = null}: any) => {
+    const {user} = usePage<ISharedPropsInterface>().props;
 
     return (
         <div>
@@ -17,7 +17,7 @@ const MainLayout = ({children, budget = null}: any) => {
             <div className="flex bg-gray-100 text-gray-900 min-h-screen">
                 {/*This means were inside a budget*/}
                 {user && budget &&
-                    <SideNavigation budget={budget} accounts={accounts}/>
+                    <SideNavigation budget={budget} all_accounts={all_accounts}/>
                 }
                 <main role="main" className="w-full bg-gray-200 rounded-lg m-3 flex-grow p-3 overflow-auto">
                     {children}
