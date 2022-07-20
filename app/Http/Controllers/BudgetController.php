@@ -38,8 +38,7 @@ class BudgetController extends Controller
     public function store(StoreBudgetRequest $request)
     {
         try {
-            $budget = new Budget(['budget_name'=>$request->budget_name]);
-            Auth::user()->budget()->save($budget);
+            $budget = Budget::create(['budget_name'=>$request->budget_name]);
         } catch (\Exception $e){
             return Response()->json(['exception'=>$e]);
         }
@@ -89,8 +88,12 @@ class BudgetController extends Controller
      */
     public function destroy(Budget $budget)
     {
-        $budget->delete();
+        try{
+            $budget->delete();
+        }catch (\Exception $e){
 
-        return Redirect()->back();
+        }
+
+        return Redirect()->back()->setStatusCode(302);
     }
 }
