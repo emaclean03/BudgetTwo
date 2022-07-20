@@ -35,7 +35,7 @@ class BudgetController extends Controller
      * @param  \App\Http\Requests\StoreBudgetRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreBudgetRequest $request)
+    public function store(StoreBudgetRequest $request)//
     {
         try {
             $budget = Budget::create(['budget_name'=>$request->budget_name]);
