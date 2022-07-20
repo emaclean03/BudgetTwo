@@ -14,7 +14,6 @@ const Account = ({account, budget, all_transactions}: { account: IBankAccount, b
     const handleAddTransactions = (transaction:{id: number,transaction_payee:string, transaction_outflow:number, transaction_inflow:number, transaction_category:number,}) => {
        axios.post(`/transaction/${account.id}/transaction`, transaction)
            .then((res:any) => {
-               console.log('res data', res.data);
                dispatch({
                    type: 'add',
                    transaction: res.data.transaction,
