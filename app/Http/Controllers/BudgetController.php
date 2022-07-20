@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateBudgetRequest;
 use App\Models\Budget;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Redis;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -19,6 +20,8 @@ class BudgetController extends Controller
      */
     public function index(Budget $budget): Response
     {
+        Redis::set('current_budget_id', $budget->id);
+
         return Inertia::render('Budget/Budget', [
             'budget'=>$budget,
             'all_accounts'=>$budget->account()->get(),

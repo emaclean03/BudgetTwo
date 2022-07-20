@@ -9,10 +9,8 @@ export interface IAuth {
 }
 //Single budget
 export interface IBudget {
-    budget: {
         budget_name: string,
         id: number,
-    },
 }
 
 //Single bank account

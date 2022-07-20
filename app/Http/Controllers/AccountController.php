@@ -10,6 +10,7 @@ use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Redis;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -43,8 +44,8 @@ class AccountController extends Controller
     public function store(StoreAccountRequest $request)
     {
         try {
-            Account::create([
-                'budget_id'=> $request->budget_id,
+           Account::create([
+                'budget_id'=> Redis::get('current_budget_id'),
                 'account_name' => $request->account_name,
                 'account_type' => $request->account_type,
                 'account_balance' => $request->account_balance
@@ -53,7 +54,6 @@ class AccountController extends Controller
             Log::error('Error creating new account: ' . $e->getMessage());
         }
         return Redirect::back();
-
     }
 
     /**
