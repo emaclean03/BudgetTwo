@@ -1,11 +1,11 @@
 import React, {useEffect, useReducer} from "react";
 import MainLayout from "../../Layouts/MainLayout";
-import {IBankAccount, IBudget, IAllTransactions} from "../../interface";
+import {IBankAccount, IBudget, IAllTransactions, IAllBankAccounts} from "../../interface";
 import {transactionReducer} from '../../reducers/Account/transactionReducer';
 import axios from "axios";
 import AccountTransactionsTable from "../../Components/Account/AccountTransactionsTable";
 
-const Account = ({account, budget, all_transactions}: { account: IBankAccount, budget: IBudget, all_transactions: [] }) => {
+const Account = ({account, budget, all_transactions, all_accounts}: { account: IBankAccount, budget: IBudget, all_transactions: [], all_accounts: IAllBankAccounts[] }) => {
     const [transactions, dispatch] = useReducer(
         transactionReducer,
         all_transactions,
@@ -21,7 +21,7 @@ const Account = ({account, budget, all_transactions}: { account: IBankAccount, b
            })
     }
     return (
-        <MainLayout budget={budget}>
+        <MainLayout budget={budget} all_accounts={all_accounts}>
             <div className={'flex bg-gray-900 text-gray-100'}>
                 <div className={'flex-1'}>{account.account_name}</div>
                 <div className={'flex-1 sticky top-0 h-full float-right'}>${account.account_balance}</div>

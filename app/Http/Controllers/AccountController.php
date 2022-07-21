@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
+use App\Models\Budget;
 use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
@@ -64,11 +65,14 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
+        $budget = Budget::findOrFail(Redis::get('current_budget_id'));
+
           return Inertia::render('Account/Account', [
               'account'=>$account,
               'budget'=>$account->budget()->first(),
               'all_transactions'=>$account->transaction()->with('category')->get(),
               'categories'=>Category::all(),
+              'all_accounts'=>$budget->account()->get(),
         ]);
     }
 
