@@ -5,13 +5,21 @@ import {transactionReducer} from '../../reducers/Account/transactionReducer';
 import axios from "axios";
 import AccountTransactionsTable from "../../Components/Account/AccountTransactionsTable";
 
+interface ITransaction{
+        id: number,
+        transaction_payee: string,
+        transaction_outflow: number,
+        transaction_inflow: number,
+        transaction_category: number
+}
+
 const Account = ({account, budget, all_transactions, all_accounts}: { account: IBankAccount, budget: IBudget, all_transactions: [], all_accounts: IAllBankAccounts[] }) => {
     const [transactions, dispatch] = useReducer(
         transactionReducer,
         all_transactions,
     );
 
-    const handleAddTransactions = (transaction:{id: number,transaction_payee:string, transaction_outflow:number, transaction_inflow:number, transaction_category:number,}) => {
+    const handleAddTransactions = (transaction: ITransaction) => {
        axios.post(`/transaction/${account.id}/transaction`, transaction)
            .then((res:any) => {
                dispatch({
