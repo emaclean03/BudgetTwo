@@ -8,6 +8,7 @@ use App\Models\Account;
 use App\Models\Budget;
 use App\Models\Category;
 use App\Models\Transaction;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
@@ -39,19 +40,19 @@ class AccountController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreAccountRequest  $request
+     * @param \App\Http\Requests\StoreAccountRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreAccountRequest $request)
     {
         try {
-           Account::create([
-                'budget_id'=> Redis::get('current_budget_id'),
+            Account::create([
+                'budget_id' => Redis::get('current_budget_id'),
                 'account_name' => $request->account_name,
                 'account_type' => $request->account_type,
                 'account_balance' => $request->account_balance
             ]);
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             Log::error('Error creating new account: ' . $e->getMessage());
         }
         return Redirect::back();
@@ -60,26 +61,26 @@ class AccountController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Account  $account
+     * @param \App\Models\Account $account
      * @return \Inertia\Response
      */
     public function show(Account $account)
     {
         $budget = Budget::findOrFail(Redis::get('current_budget_id'));
 
-          return Inertia::render('Account/Account', [
-              'account'=>$account,
-              'budget'=>$account->budget()->first(),
-              'all_transactions'=>$account->transaction()->with('category')->get(),
-              'categories'=>Category::all(),
-              'all_accounts'=>$budget->account()->get(),
+        return Inertia::render('Account/Account', [
+            'account' => $account,
+            'budget' => $account->budget()->first(),
+            'all_transactions' => $account->transaction()->with('category')->get(),
+            'categories' => Category::all(),
+            'all_accounts' => $budget->account()->get(),
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Account  $account
+     * @param \App\Models\Account $account
      * @return \Illuminate\Http\Response
      */
     public function edit(Account $account)
@@ -90,8 +91,8 @@ class AccountController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateAccountRequest  $request
-     * @param  \App\Models\Account  $account
+     * @param \App\Http\Requests\UpdateAccountRequest $request
+     * @param \App\Models\Account $account
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateAccountRequest $request, Account $account)
@@ -102,11 +103,18 @@ class AccountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Account  $account
-     * @return \Illuminate\Http\Response
+     * @param \App\Models\Account $account
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Account $account)
     {
-        //
+        try {
+            $account->delete();
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            return Redirect::back()->with('error', 'There was an error deleting this account.');
+        }
+
+        return Redirect::back()->with('success', 'Successfully deleted account');
     }
 }
