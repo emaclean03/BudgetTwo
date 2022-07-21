@@ -13,6 +13,8 @@ use Tests\TestCase;
 
 class AccountTest extends TestCase
 {
+    use RefreshDatabase;
+
     private $budget;
     private $budget_id;
 
