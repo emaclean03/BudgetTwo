@@ -16,7 +16,7 @@ const Account = ({account, budget, all_transactions, all_accounts}: { account: I
            .then((res:any) => {
                dispatch({
                    type: 'add',
-                   transaction: res.data.transaction,
+                   transaction: res.data.transaction,//
                });
            })
     }
