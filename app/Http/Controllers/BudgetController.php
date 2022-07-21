@@ -42,7 +42,7 @@ class BudgetController extends Controller
         } catch (\Exception $e){
             return Response()->json(['exception'=>$e]);
         }
-
+//
         return Response()->json($budget);
     }
 
