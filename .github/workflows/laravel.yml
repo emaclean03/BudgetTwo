@@ -49,5 +49,6 @@ jobs:
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
+        REDIS_HOST: redis
         REDIS_PORT: 6379
       run: vendor/bin/phpunit
