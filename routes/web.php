@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TransactionController;
 use App\Models\Budget;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +30,6 @@ Route::prefix('budget')->middleware('auth')->group(function () {
     Route::get('/{budget}', [BudgetController::class, 'index'])->name('Budget.index');
     Route::post('/', [BudgetController::class, 'store'])->name('Budget.store');
     Route::post('/{budget}/delete', [BudgetController::class, 'destroy'])->name('Budget.destroy');
-    //create new budget
 });
 
 Route::prefix('account')->middleware('auth')->group(function () {
@@ -37,6 +37,10 @@ Route::prefix('account')->middleware('auth')->group(function () {
     Route::get('/create', [AccountController::class, 'create'])->name('Account.create'); //Create a new account
     Route::post('/store', [AccountController::class, 'store'])->name('Account.store'); //store a new account
     Route::post('/{account}/delete', [AccountController::class, 'destroy'])->name('Account.destroy'); //store a new account
+});
+
+Route::prefix('category')->middleware('auth')->group(function () {
+    Route::post('/{budget}/', [CategoryController::class, 'store'])->name('Category.store'); //show single account
 });
 
 Route::prefix('transaction')->middleware('auth')->group(function () {

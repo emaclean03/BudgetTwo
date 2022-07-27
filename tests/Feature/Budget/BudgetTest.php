@@ -6,7 +6,7 @@ use App\Models\Budget;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Redis;
+use Inertia\Testing\AssertableInertia;
 use Tests\TestCase;
 
 class BudgetTest extends TestCase
@@ -55,4 +55,35 @@ class BudgetTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_budget_has_categories(): void
+    {
+        $budget = Budget::factory()->hasCategory(3)->create();
+        $response = $this->get('budget/' . $budget->id);
+
+        $response->assertInertia(fn (AssertableInertia $page) =>$page
+            ->component('Budget/Budget')
+            ->has('all_categories',3, fn (AssertableInertia $page) => $page
+                ->where('id', $budget->category()->first()->id)
+                ->where('user_id', $this->user->id)
+                ->where('category_name', $budget->category()->first()->category_name)
+                ->where('category_amount_assigned', $budget->category()->first()->category_amount_assigned)
+                ->where('category_amount_activity', $budget->category()->first()->category_amount_activity)
+                ->where('budget_id', $budget->id)
+                ->etc()
+            )
+        );
+    }
+
+    public function test_can_store_a_new_category(): void
+    {
+        $budget = Budget::factory()->create()->id;
+        $category = Category::factory()->make();
+
+        $this->post("/category/${budget}/", $category->toArray())
+        ->assertStatus(302);
+
+        $this->assertDatabaseHas('categories', $category->toArray());
+    }
+
 }

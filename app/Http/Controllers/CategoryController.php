@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Budget;
 use App\Models\Category;
+use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
 {
@@ -32,11 +34,15 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreCategoryRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(Budget $budget, StoreCategoryRequest $request)
     {
-        //
+       $category = Category::make($request->all());
+
+       $budget->category()->save($category);
+
+       return Redirect::back();
     }
 
     /**
