@@ -6,6 +6,7 @@ use App\Http\Requests\StoreBudgetRequest;
 use App\Http\Requests\UpdateBudgetRequest;
 use App\Models\Budget;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Redis;
 use Inertia\Inertia;
@@ -89,9 +90,10 @@ class BudgetController extends Controller
     public function destroy(Budget $budget)
     {
         try{
+            //BudgetObserver is deleting child data on deleting
             $budget->delete();
         }catch (\Exception $e){
-
+            Log::info($e->getMessage());
         }
 
         return Redirect()->back()->setStatusCode(302);
