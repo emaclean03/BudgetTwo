@@ -19,7 +19,7 @@ const MainLayout = ({children, budget = null, all_accounts = null}: any) => {
                 {user && budget &&
                     <SideNavigation budget={budget} all_accounts={all_accounts}/>
                 }
-                <main role="main" className="w-full bg-gray-200 rounded-lg m-3 flex-grow p-3 overflow-auto">
+                <main role="main" className="w-full bg-gray-200 rounded-lg m-3 p-3 overflow-auto">
                     {children}
                 </main>
             </div>
