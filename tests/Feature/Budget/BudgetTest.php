@@ -75,5 +75,15 @@ class BudgetTest extends TestCase
         );
     }
 
+    public function test_can_store_a_new_category(): void
+    {
+        $budget = Budget::factory()->create()->id;
+        $category = Category::factory()->make();
+
+        $this->post("/category/${budget}/", $category->toArray())
+        ->assertStatus(302);
+
+        $this->assertDatabaseHas('categories', $category->toArray());
+    }
 
 }
