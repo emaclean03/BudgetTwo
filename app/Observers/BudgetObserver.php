@@ -20,6 +20,19 @@ class BudgetObserver
     }
 
     /**
+     * Handle to the post "deleting" event.
+     *
+     * @param  \App\Models\Account  $account
+     * @return void
+     */
+    public function deleting(Budget $budget)
+    {
+        $budget->transaction()->delete();
+        $budget->account()->delete();
+        $budget->category()->delete();
+    }
+
+    /**
      * Handle the Budget "created" event.
      *
      * @param  \App\Models\Budget  $budget
