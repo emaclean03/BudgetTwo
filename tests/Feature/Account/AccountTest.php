@@ -61,9 +61,9 @@ class AccountTest extends TestCase
         ]);
 
         $accountId = $account->id;
-        $response = $this->post("/account/${accountId}/delete");
+        $response = $this->followingRedirects()->post("/account/${accountId}/delete");
 
-        $response->assertStatus(302);
+        $response->assertStatus(200);
         $this->assertModelMissing($account);
     }
 }

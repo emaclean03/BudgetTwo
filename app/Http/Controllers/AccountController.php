@@ -108,13 +108,18 @@ class AccountController extends Controller
      */
     public function destroy(Account $account)
     {
+        //Get current budget so we can redirect back to it
+        $budget = $account->budget->id;
         try {
+            //Delete transactions
+            //Delete account
+            $account->transaction()->delete();
             $account->delete();
         } catch (Exception $e) {
             Log::error($e->getMessage());
-            return Redirect::back()->with('error', 'There was an error deleting this account.');
+            return Redirect("/budget/${budget}")->with('error', 'There was an error deleting this account.');
         }
 
-        return Redirect::back()->with('success', 'Successfully deleted account');
+        return Redirect("/budget/${budget}")->with('success', 'Successfully deleted account.');
     }
 }
