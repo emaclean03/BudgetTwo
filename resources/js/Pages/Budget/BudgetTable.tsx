@@ -1,42 +1,29 @@
-import React, {useMemo} from "react";
+import React, {useEffect, useMemo} from "react";
 import { useTable } from 'react-table'
-import {ColumnDetails} from "../../interface";
+import {ColumnDetails, IAll_categories} from "../../interface";
 
-const BudgetTable = () => {
+const BudgetTable = ({categories}:any) => {
     const data = useMemo<ColumnDetails[]>(
-        () => [
-            {
-                Category: 'Mortgage',
-                Assigned: '120',
-                Activity: '-50',
-                Available: '70',
-            },{
-                Category: 'Transportation',
-                Assigned: '100',
-                Activity: '50',
-                Available: '50',
-            },
-        ],
-        []
-    )
+        () => categories,
+        [categories])
 
     const columns = useMemo(
         () => [
             {
                 Header: 'Category',
-                accessor: 'Category', // accessor is the "key" in the data
+                accessor: 'category_name', // accessor is the "key" in the data
             },
             {
                 Header: 'Assigned',
-                accessor: 'Assigned', // accessor is the "key" in the data
+                accessor: 'category_amount_assigned', // accessor is the "key" in the data
             },
             {
                 Header: 'Activity',
-                accessor: 'Activity', // accessor is the "key" in the data
+                accessor: 'category_amount_activity', // accessor is the "key" in the data
             },
             {
                 Header: 'Available',
-                accessor: 'Available', // accessor is the "key" in the data
+                accessor: 'category_amount_available', // accessor is the "key" in the data
             },
         ],
         []
