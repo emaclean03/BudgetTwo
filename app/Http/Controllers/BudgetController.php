@@ -21,6 +21,7 @@ class BudgetController extends Controller
      */
     public function index(Budget $budget): Response
     {
+
         Redis::set('current_budget_id', $budget->id);
         return Inertia::render('Budget/Budget', [
             'budget'=>$budget,

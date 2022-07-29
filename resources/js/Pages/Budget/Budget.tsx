@@ -2,18 +2,17 @@ import React, {useEffect, useState} from "react";
 import MainLayout from "../../Layouts/MainLayout";
 import BudgetTable from "./BudgetTable";
 import {Link} from "@inertiajs/inertia-react";
-import {IAllBankAccounts, IBudget} from "../../interface";
+import {IAll_categories, IAllBankAccounts, IBudget} from "../../interface";
 import {Inertia} from "@inertiajs/inertia";
 
 
-const Budget = ({budget, all_accounts, account_balance}: { budget: IBudget, all_accounts: IAllBankAccounts, account_balance: number }) => {
+const Budget = ({budget, all_accounts, account_balance, all_categories}: { budget: IBudget, all_accounts: IAllBankAccounts, account_balance: number, all_categories:IAll_categories }) => {
     const [category, setCategory] = useState({
         category_name: 'New category',
         category_amount_assigned: 0.00,
         category_amount_activity: 0.00,
         category_amount_available: 0.00,
-    });
-
+    }); //TODO: Use SetCategory for custom categories (modal?)
 
     const handleNewCategory = () => {
         Inertia.post(`/category/${budget.id}/store`, category);
@@ -33,7 +32,7 @@ const Budget = ({budget, all_accounts, account_balance}: { budget: IBudget, all_
                        font-bold bg-blue-600 text-white rounded">Balance: ${account_balance}</span>
             </div>
             <div className={'container rounded-md border-2 border-gray-400'}>
-                <BudgetTable/>
+                <BudgetTable categories={all_categories}/>
             </div>
         </MainLayout>
     )
