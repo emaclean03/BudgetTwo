@@ -86,4 +86,18 @@ class BudgetTest extends TestCase
         $this->assertDatabaseHas('categories', $category->toArray());
     }
 
+    public function test_can_delete_a_category(): void
+    {
+        $budget = Budget::factory()->create();
+        $category = Category::factory()->make();
+
+        $budget->category()->save($category);
+
+        $id = $category->id;
+        $this->post("/category/${id}/delete", $category->toArray())
+            ->assertStatus(302);
+
+        $this->assertDatabaseMissing('categories', $category->toArray());
+    }
+
 }

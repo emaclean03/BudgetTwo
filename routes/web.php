@@ -36,15 +36,16 @@ Route::prefix('account')->middleware('auth')->group(function () {
     Route::get('/{account}/show', [AccountController::class, 'show'])->name('Account.index'); //show single account
     Route::get('/create', [AccountController::class, 'create'])->name('Account.create'); //Create a new account
     Route::post('/store', [AccountController::class, 'store'])->name('Account.store'); //store a new account
-    Route::post('/{account}/delete', [AccountController::class, 'destroy'])->name('Account.destroy'); //store a new account
+    Route::post('/{account}/delete', [AccountController::class, 'destroy'])->name('Account.destroy'); //delete an account
 });
 
 Route::prefix('category')->middleware('auth')->group(function () {
-    Route::post('/{budget}/', [CategoryController::class, 'store'])->name('Category.store'); //show single account
+    Route::post('/{budget}/store', [CategoryController::class, 'store'])->name('Category.store'); //store single category
+    Route::post('/{category}/delete', [CategoryController::class, 'destroy'])->name('Category.destroy'); //Delete single category
 });
 
 Route::prefix('transaction')->middleware('auth')->group(function () {
-    Route::post('/{account}/transaction', [TransactionController::class, 'store'])->name('Transaction.store'); //show single account
+    Route::post('/{account}/transaction', [TransactionController::class, 'store'])->name('Transaction.store'); //create single transaction
 });
 
 require __DIR__ . '/auth.php';
