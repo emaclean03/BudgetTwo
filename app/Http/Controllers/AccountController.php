@@ -55,6 +55,8 @@ class AccountController extends Controller
         } catch (\Exception $e) {
             Log::error('Error creating new account: ' . $e->getMessage());
         }
+
+
         return Redirect::back();
     }
 

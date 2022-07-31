@@ -21,12 +21,13 @@ class BudgetController extends Controller
      */
     public function index(Budget $budget): Response
     {
-        Redis::set('current_budget_id', $budget->id);
 
+        Redis::set('current_budget_id', $budget->id);
         return Inertia::render('Budget/Budget', [
             'budget'=>$budget,
             'all_accounts'=>$budget->account()->get(),
             'account_balance'=>$budget->account()->get()->sum('account_balance'),
+            'all_categories'=>$budget->category()->get(),
         ]);
     }
 

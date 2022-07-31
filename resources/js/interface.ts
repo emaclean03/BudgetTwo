@@ -59,6 +59,16 @@ export interface ISideNaviationProps {
     }]
 }
 
+export interface IAll_categories{
+    categories:{
+        category_name: string,
+        category_amount_assigned: number,
+        category_amount_activity: number,
+        category_amount_available:number,
+    }
+
+}
+
 /*Tables*/
 
 export interface ColumnDetails {

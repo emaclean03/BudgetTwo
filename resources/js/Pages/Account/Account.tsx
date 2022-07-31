@@ -1,25 +1,12 @@
 import React, {useEffect, useReducer} from "react";
 import MainLayout from "../../Layouts/MainLayout";
 import {IBankAccount, IBudget, IAllTransactions, IAllBankAccounts} from "../../interface";
-import {transactionReducer} from '../../reducers/Account/transactionReducer';
-import axios from "axios";
 import AccountTransactionsTable from "../../Components/Account/AccountTransactionsTable";
 import {Inertia} from "@inertiajs/inertia";
 
 const Account = ({account, budget, all_transactions, all_accounts}: { account: IBankAccount, budget: IBudget, all_transactions: [], all_accounts: IAllBankAccounts[] }) => {
-    const [transactions, dispatch] = useReducer(
-        transactionReducer,
-        all_transactions,
-    );
-
     const handleAddTransactions = (transaction: { id: number, transaction_payee: string, transaction_outflow: number, transaction_inflow: number, transaction_category: number, }) => {
-        axios.post(`/transaction/${account.id}/transaction`, transaction)
-            .then((res: any) => {
-                dispatch({
-                    type: 'add',
-                    transaction: res.data.transaction,//
-                });
-            })
+     Inertia.post(`/transaction/${account.id}/transaction`, transaction);
     }
     const handleDeleteAccount = () => {
         confirm("Are you sure you wish to delete this account? This will remove ALL transactions") && Inertia.post(`/account/${account.id}/delete`)
@@ -68,7 +55,7 @@ const Account = ({account, budget, all_transactions, all_accounts}: { account: I
             <hr/>
 
             <div className={'flex pt-12 bg-gray-900 text-gray-100'}>
-                <div className={'flex-1'}><AccountTransactionsTable all_transactions={transactions}/></div>
+                <div className={'flex-1'}><AccountTransactionsTable all_transactions={all_transactions}/></div>
             </div>
 
 
