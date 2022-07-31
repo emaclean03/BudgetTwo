@@ -80,7 +80,7 @@ class BudgetTest extends TestCase
         $budget = Budget::factory()->create()->id;
         $category = Category::factory()->make();
 
-        $this->post("/category/${budget}/", $category->toArray())
+        $this->post("/category/${budget}/store", $category->toArray())
         ->assertStatus(302);
 
         $this->assertDatabaseHas('categories', $category->toArray());

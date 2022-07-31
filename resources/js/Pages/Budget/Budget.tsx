@@ -4,6 +4,8 @@ import BudgetTable from "./BudgetTable";
 import {Link} from "@inertiajs/inertia-react";
 import {IAll_categories, IAllBankAccounts, IBudget} from "../../interface";
 import {Inertia} from "@inertiajs/inertia";
+import CustomModal from "../../Components/CustomModal";
+import {Button, Input} from "@mui/material";
 
 
 const Budget = ({budget, all_accounts, account_balance, all_categories}: { budget: IBudget, all_accounts: IAllBankAccounts, account_balance: number, all_categories:IAll_categories }) => {
@@ -13,20 +15,35 @@ const Budget = ({budget, all_accounts, account_balance, all_categories}: { budge
         category_amount_activity: 0.00,
         category_amount_available: 0.00,
     }); //TODO: Use SetCategory for custom categories (modal?)
+    const [isOpen, setIsOpen] = useState(false);
 
-    const handleNewCategory = () => {
-        Inertia.post(`/category/${budget.id}/store`, category);
+    const handleNewCategoryModalOpen = () => {
+        setIsOpen(true);
+    }
+
+    const handleNewCategoryModalClose = () => {
+        setIsOpen(false);
+    }
+
+    const handleNewCategorySave = () => {
+        Inertia.post(`/category/${budget.id}/store`, category, {
+            onSuccess: () => {
+                setIsOpen(false);
+            },
+        });
     }
 
     return (
         <MainLayout budget={budget} all_accounts={all_accounts}>
+            {/*Modal for creating new category*/}
+            <CustomModal isOpen={isOpen} handleClose={handleNewCategoryModalClose} handleSave={handleNewCategorySave} title={'Create category'} subtitle={'Create a new category'}>
+                <Input placeholder={'Category Name'} type={'text'} onChange={(e) => setCategory({...category, category_name: e.target.value}) }/>
+            </CustomModal>
+
             <div className="flex justify-around border-black px-6 py-2 flex">
                 <div className={'block'}>
                     {/*Make this into a navigation component*/}
-                    <button
-                        className={'text-blue-600 hover:text-blue-700 transition duration-300 ease-in-out mb-4'}
-                        onClick={handleNewCategory}>Create Category
-                    </button>
+                    <Button  onClick={handleNewCategoryModalOpen}>Create Category</Button>
                 </div>
                 <span className="py-1.5 px-2.5 text-center
                        font-bold bg-blue-600 text-white rounded">Balance: ${account_balance}</span>

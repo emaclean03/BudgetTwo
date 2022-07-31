@@ -1,8 +1,11 @@
-import React, {useEffect, useMemo} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import { useTable } from 'react-table'
-import {ColumnDetails, IAll_categories} from "../../interface";
+import {ColumnDetails} from "../../interface";
+import CustomModal from "../../Components/CustomModal";
 
 const BudgetTable = ({categories}:any) => {
+    const [isOpen, setIsOpen] = useState(false);
+
     const data = useMemo<ColumnDetails[]>(
         () => categories,
         [categories])
@@ -39,6 +42,19 @@ const BudgetTable = ({categories}:any) => {
         prepareRow,
     } = tableInstance
 
+    const handleCategoryModalOpen = () => {
+        setIsOpen(true);
+    }
+
+    const handleCategoryModalClose = () => {
+        setIsOpen(false);
+    }
+
+    const handleCategoryModalSave = () => {
+        alert('saving');
+        setIsOpen(false);
+    }
+
     return(
         <>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -59,7 +75,7 @@ const BudgetTable = ({categories}:any) => {
                             </tr>
                         ))}
                     </thead>
-                    <tbody {...getTableBodyProps()}>
+                    <tbody onClick={handleCategoryModalOpen} {...getTableBodyProps()}>
                     {// Loop over the table rows
                         rows.map(row => {
                             // Prepare the row for display
