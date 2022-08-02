@@ -17,5 +17,5 @@ module.exports = {
         },
     },
 
-    plugins: [require('@tailwindcss/forms'), require('tw-elements/dist/plugin')],
+   // plugins: [import('@tailwindcss/forms'), import('tw-elements/dist/plugin')],
 };
