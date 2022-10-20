@@ -20,8 +20,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
-
         //Create a user, and for each user, add a Budget
         User::factory(1)->create(['email'=>'emaclean03@aol.com'])->each(function ($user) {
             //Create a budget, and for each budget creat a bank account
